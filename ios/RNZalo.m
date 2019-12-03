@@ -1,6 +1,6 @@
 #import "RNZalo.h"
 #import <React/RCTLog.h>
-#import <ZaloSDK/ZaloSDK.h>
+#import "./ZaloSDK.h"
 @implementation RNZalo
 RCT_EXPORT_MODULE();
 
