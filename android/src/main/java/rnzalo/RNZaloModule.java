@@ -13,7 +13,8 @@ import com.zing.zalo.zalosdk.oauth.OauthResponse;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.Promise;
 import com.zing.zalo.zalosdk.oauth.LoginVia;
-
+import com.zing.zalo.zalosdk.oauth.LoginVia;
+import android.util.Log;
 import org.json.JSONObject;
 
 public class RNZaloModule extends ReactContextBaseJavaModule {
@@ -35,6 +36,7 @@ public class RNZaloModule extends ReactContextBaseJavaModule {
             @Override
             public void onAuthenError(int errorCode, String message) {
                 final String code = errorCode + "";
+                Log.v("ReactNative", "fail");
                 promise.reject(code, message);
             }
 
@@ -44,6 +46,7 @@ public class RNZaloModule extends ReactContextBaseJavaModule {
                 params.putString("uId", "" + uId);
                 params.putString("oauthCode", "" + oauthCode);
                 params.putString("channel", "" + channel);
+                promise.resolve(params);
                 ZaloSDK.Instance.getProfile(activity, new ZaloOpenAPICallback() {
                     @Override
                     public void onResult(JSONObject data) {
