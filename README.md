@@ -1,44 +1,22 @@
 
 # React Native Zalo
+![](./screenshots/android.gif)
 
-[![npm version](https://badge.fury.io/js/rn-zalo.svg)](https://badge.fury.io/js/rn-zalo)
-[![npm](https://img.shields.io/npm/dt/rn-zalo.svg)](https://npmcharts.com/compare/rn-zalo?minimal=true)
-![MIT](https://img.shields.io/dub/l/vibe-d.svg)
-![Platform - Android and iOS](https://img.shields.io/badge/platform-Android%20%7C%20iOS-yellow.svg)
+![](./screenshots/ios.gif)
 
-Android | iOS
------------- | -------------
-<img src="https://github.com/phithu/rn-zalo/blob/master/screenshots/android.gif" width="360"> | <img src="https://github.com/phithu/rn-zalo/blob/master/screenshots/ios.gif" width="360">
-
-
-## Installation
-
-```sh
-yarn add rn-zalo
-```
-
-Or with npm
-
-```sh
-npm i rn-zalo --save
-```
-- **React Native 0.60 and higher**
-
-  ```sh
-  cd ios
-  pod install
-  cd ..
-  ```
-  
-- **React Native 0.59 and lower**
-  
-  ```sh
-  react-native link rn-zalo
-  ```
+`$ npm install rn-zalo --save`
 
 ### Zalo SDK Documents
 - iOS: https://developers.zalo.me/docs/sdk/ios-sdk-9
 - Android: https://developers.zalo.me/docs/sdk/android-sdk-8
+
+### Mostly automatic installation
+
+`$ react-native link rn-zalo`
+
+### Limitation
+
+- **Only working on real device**
 
 ### Manual installation
 
@@ -63,11 +41,11 @@ target 'RNZalo' do
     pod 'ZaloSDK'
 end
 ```
-##### 5. Add URL Type `Main target setting -> info -> URL types -> click +`
+5. Add URL Type `Main target setting -> info -> URL types -> click +`
 
 `identifier = “zalo”, URL Schemes = “zalo-<YOUR_APP_ID>”`
 
-##### 6. Open `AppDelegate.m`
+6. Open `AppDelegate.m`
 ```
 ...
 #import <ZaloSDK/ZaloSDK.h>
@@ -77,23 +55,29 @@ end
     [[ZaloSDK sharedInstance] initializeWithAppId:@"<YOUR_APP_ID>"];
     return YES;
 }
-...  
-
-- (BOOL)application:(UIApplication *)application openURL:(nonnull NSURL *)url options:(nonnull NSDictionary<NSString *,id> *)options {
-  return [[ZDKApplicationDelegate sharedInstance] application:application openURL:url options:options];
+  
+- (BOOL)application:(UIApplication *)application 
+    openURL:(NSURL *)url
+    sourceApplication:(NSString *)sourceApplication
+    annotation:(id)annotation {
+ 
+    return [[ZDKApplicationDelegate sharedInstance] 
+    application:application
+    openURL:url sourceApplication:sourceApplication annotation:annotation];
 }
-
 ```
 7. Clear and Run your project
 
 #### Android
 
 1. Open up `android/app/src/main/java/[...]/MainApplication.java`
+  - Add `import rnzalo.RNZaloPackage;` to the imports at the top of the file
   - Add `import com.zing.zalo.zalosdk.oauth.ZaloSDKApplication;` to the imports
+  - Add `new RNZaloPackage()` to the list returned by the `getPackages()` method
   - Add `ZaloSDKApplication.wrap(this)` on "onCreate" function
-  
 2. Open up `android/app/src/main/java/[...]/MainActivity.java`
   ```
+ ... 
  import android.content.Intent;
  import com.zing.zalo.zalosdk.oauth.ZaloSDK;
  import com.facebook.react.ReactActivity;
@@ -107,15 +91,21 @@ end
          ZaloSDK.Instance.onActivityResult(this, requestCode, resultCode, data);
      }
  }
+
   ```
-3. Insert the following lines inside the dependencies block in `android/app/build.gradle`:
+3. Append the following lines to `android/settings.gradle`:
+  	```
+  	include ':rn-zalo'
+  	project(':rn-zalo').projectDir = new File(rootProject.projectDir, 	'../node_modules/rn-zalo/android')
+  	```
+4. Insert the following lines inside the dependencies block in `android/app/build.gradle`:
   	```
   	...
-    implementation "com.zing.zalo.zalosdk:core:+"
-    implementation "com.zing.zalo.zalosdk:auth:+"
-    implementation "com.zing.zalo.zalosdk:openapi:+"
+  	implementation "com.zing.zalo.zalosdk:core:2.4.2501"
+    implementation "com.zing.zalo.zalosdk:auth:2.4.2501"
+    implementation project(':rn-zalo')
   	```
-4. Add appId to `android/app/src/main/res/values/strings.xml`
+5. Add appId to `android/app/src/main/res/values/strings.xml`
 ```
 <resources>
     <string name="app_name">App Name</string>
@@ -123,7 +113,7 @@ end
 </res>
 ```
 
-5. Add code bellow to `android/app/src/main/res/AndroidManifest.xml`
+6. Add code bellow to `android/app/src/main/res/AndroidManifest.xml`
 ```
  <application
         ...
