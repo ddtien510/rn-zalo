@@ -1,25 +1,56 @@
 {
-  "name": "rn-zalo",
-  "version": "2.0.4",
+  "_from": "rn-zalo@^2.1.0",
+  "_id": "rn-zalo@2.1.0",
+  "_inBundle": false,
+  "_integrity": "sha512-fzq7m99Ake5GTYJhU5rK/CjeNGLz05zwRWewq+aNSG9LKFex7U1gJpimlW6iHSrIgczcFn9zOACPZolAw5Q3Iw==",
+  "_location": "/rn-zalo",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "range",
+    "registry": true,
+    "raw": "rn-zalo@^2.1.0",
+    "name": "rn-zalo",
+    "escapedName": "rn-zalo",
+    "rawSpec": "^2.1.0",
+    "saveSpec": null,
+    "fetchSpec": "^2.1.0"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/rn-zalo/-/rn-zalo-2.1.0.tgz",
+  "_shasum": "f03be72d8bd63fd60a4f1766d14cacb2c782f077",
+  "_spec": "rn-zalo@^2.1.0",
+  "_where": "/Users/tiendd/working/v14-feature",
+  "author": {
+    "name": "Phi Thu"
+  },
+  "bugs": {
+    "url": "https://github.com/phithu/rn-zalo/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
   "description": "A React Native Module for Zalo SDK",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/phithu/rn-zalo.git"
-  },
+  "homepage": "https://github.com/phithu/rn-zalo",
   "keywords": [
     "react-native",
     "rn-zalo",
     "react-native-zalo",
     "zalo"
   ],
-  "author": "Phi Thu",
   "license": "MIT",
+  "main": "index.js",
+  "name": "rn-zalo",
   "peerDependencies": {
     "react-native": "*"
   },
-  "homepage": "https://github.com/phithu/rn-zalo"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/phithu/rn-zalo.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "2.1.0"
 }
